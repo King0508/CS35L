@@ -1,0 +1,75 @@
+
+The chorus lapilli game is built upon the tic-tac-toe game. 
+To begin, since the game requires the player to move its pieces instead of placing down pieces after 
+the third move, we can spilt the game into two different phases: placement phase and movement phase. 
+To determine what phase of the game we are in, 
+	const [placementCounts, setPlacementCounts] = useState({ X:0, O; 0 }); 
+As the game progresses, we can update the placementCounts, and if X or O is greater than 3, then we can 
+classify the game into the movement phase. Prior to that, the game is essentially tic-tac-toe. 
+
+When the game enters the movement phase, we would need to select a particular piece on the board, and then 
+move that piece to a valid square. To handle this, 
+	const [selectedSquare, setSelectedSquare] = useState(null); 
+When a square is selected in the movement phase, we first check if a square is already selected, if selected 
+we need to check if the square contains the right piece. Otherwise, a square is already selected, so we need 
+to check the new destination is empty and considered adjacent. But even before that, we need to consider the case 
+that the center piece is occupied. 
+
+
+
+
+
+npm <command>
+
+Usage:
+
+npm install        install all the dependencies in your project
+npm install <foo>  add the <foo> dependency to your project
+npm test           run this project's tests
+npm run <foo>      run the script named <foo>
+npm <command> -h   quick help on <command>
+npm -l             display usage info for all commands
+npm help <term>    search for help on <term> (in a browser)
+npm help npm       more involved overview (in a browser)
+
+All commands:
+
+    access, adduser, audit, bugs, cache, ci, completion,
+    config, dedupe, deprecate, diff, dist-tag, docs, doctor,
+    edit, exec, explain, explore, find-dupes, fund, get, help,
+    help-search, hook, init, install, install-ci-test,
+    install-test, link, ll, login, logout, ls, org, outdated,
+    owner, pack, ping, pkg, prefix, profile, prune, publish,
+    query, rebuild, repo, restart, root, run-script, sbom,
+    search, set, shrinkwrap, star, stars, start, stop, team,
+    test, token, uninstall, unpublish, unstar, update, version,
+    view, whoami
+
+Specify configs in the ini-formatted file:
+    C:\Users\kings\.npmrc
+or on the command line via: npm <command> --key=value
+
+More configuration info: npm help config
+Configuration fields: npm help 7 config
+
+npm@10.8.2 C:\Program Files\nodejs\node_modules\npm
+npm notice
+npm notice package: react.dev@0.0.0
+npm notice Tarball Contents
+npm notice 610B package.json
+npm notice 228B public/index.html
+npm notice 11.8kB src/App.js
+npm notice 794B src/Board.css
+npm notice 267B src/index.js
+npm notice 1.2kB src/styles.css
+npm notice 0B src/test_chorus_lapilli.py
+npm notice Tarball Details
+npm notice name: react.dev
+npm notice version: 0.0.0
+npm notice filename: react.dev-0.0.0.tgz
+npm notice package size: 3.7 kB
+npm notice unpacked size: 15.0 kB
+npm notice shasum: da481dd9334352b8a79870bd307dd2d6e9eadbe5
+npm notice integrity: sha512-jYjIStbs1fmO8[...]Qk50qT2r5XEeg==
+npm notice total files: 7
+npm notice

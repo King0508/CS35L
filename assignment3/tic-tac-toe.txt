@@ -1,0 +1,49 @@
+How to build tic-tac-toe with React 
+
+Begin with an export default function:
+	
+	export default function Square(){
+		return <button className="square">X</button>; 
+	}
+
+This function should display just a square containing a single X. 
+To make a tic-tac-toe board, we need 9 squares, so one could consider copy and pasting 9 squares consecutively. 
+However, this doesn't work because react components need to return a single JSX element. To fix this problem,
+add <> and </> so that only one JSX element is returned. 
+
+Next, to group squares into rows, use <div> </div> after every 3 square.  
+
+Make a new component called Board() that incorporates the Square() component. 
+The Square component takes in a {value} and returns {value} so that we can dynamically input values to display the 
+correct values on the board. Now in the Board function, each square can be displayed using <Square />. 
+
+Now pass a function from the Board component to the Square component. The Square component not takes in two functions 
+like this: 
+
+	function Square({value, onSquareClick}){}
+
+and value and onSquareClick can be referenced in the Square component. 
+Within the board component, the function is passed in like this <Square value="something" onSquareClick={function}/>
+The function we pass in handles the logic for what happens when the square is clicked. 
+To implement the handleClick function, a copy of the array squares is generated using the JavaScript slice() array method. 
+
+	const[squares, setSquares] = useState(Array(9).fill(null)); 
+
+The above code sets the values of the squares array to be null and the setSquares() method can be used to update squares. Now in the handleClick function can copy using the .slice() method and update using the setSquares() method. 
+Making a copy of the array allows us to back track the game because we are not changing the previous game state, we could potentially save that state somewhere and revert moves later on if we want to. 
+
+Now we need to have a way to determine whose turn it is, and display the right letter on the board. 
+
+	const[xIsNext, setXIsNext] = useState(true); 
+
+The above code set the first variable with the Boolean value true, and the next variable allows one to change the value of the Boolean. So to begin the game, xIsNext starts as true which makes sense because X goes first, then O. 
+In the handleClick function, we can set nextSquares[i] to be "X" or "O" depending on the Boolean value, and flipping the Boolean value each time handleClick is called. The function allows needs to make sure Xs and Os cannot overlap each other, so squares[i] must be null for the function to proceed. 
+
+The next step is to declare a winner. In order to calculate the winner, the calculateWinner() component is created. The function contains a list of lists, with each list being a way the game can be won. A for loop is used to loop through each list element and check if all squares contain the same letter and is not null. When a winner is found, the letter that won is returned. 
+
+The click function is automatically returned if the square already contains something or someone won the game already. Inside the board component, an if statement checks if a winner exists, and then displays the status of the game accordingly.  
+
+The game is now complete with messages that displays the status of the game and will end upon someone wins the game. 
+
+
+  

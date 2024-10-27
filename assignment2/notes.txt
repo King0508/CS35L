@@ -1,0 +1,71 @@
+Exercise 2.1
+
+1. Ctrl-x b RET ⇒ Opens up *scratch* buffer
+
+2. (* (expt 2 (- 607 1)) (- (expt 2 607) 1))
+NOTE that ELisp is written using prefix notation (operator comes before operands)
+
+3. (+ (logb (* (expt 2 (- 607 1)) (- (expt 2 607) 1))) 1) = 1213 bits
+NOTE: logb number ⇒ returns the binary exponent of number by taking the logarithm of number base 2 and rounding down
+
+4. NOTE that Option-Shift-: allows you to evaluate an expression
+777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777\777777777777777777777777777777777777777777777777777777777777777777777000000000000000000000000000000000000000000000000000000000\000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000\0000000000000000000
+
+5.
+Ctrl-h k: describe-key
+M-SPC: cycle-spacing
+
+6. Ctrl-h k Ctrl-h k pulls up the documentation for the command Ctrl-h k, which is the command “describe-key”
+This occurs because Ctrl-h k shows the documentation for any command, and we are asking it to show the documentation for itself
+
+7. Ctrl-h k M-SPC pulls up the documentation for the command M-SPC, which is the command “cycle-spacing”
+This occurs because Ctrl-h k shows the documentation for any command, and we are asking it to show the documentation for M-SPC
+When the cursor is on whitespace, M-SPC reduces the section of continuous whitespace into one whitespace
+
+8. M-Shift-: then (just-one-space)
+Apparently can run the command using M-x j-o
+
+Python Homework Assignment
+
+1. When the script is invoked on a non-empty file, if the user inputs a number n, the script outputs n random lines from the file (no limit to the number of times a line can show up)
+
+2. When the script is invoked on an empty file, an error is thrown (IndexError: list index out of range). This is because the lines list has size 0, so when the generator calls chooseline(), it can’t because there are no lines to choose from
+
+3. The two files differ when handling errors
+
+4. It throws an error (SyntaxError: invalid syntax). This is because "except IOError as (errno, strerror)" is valid in Python2, but not Python3.
+
+5. Comparison of Times (Script works for both Python2 and Python3 likely because it's backwards compatible):
+
+1. shuf
+real	0m0.073s            real	0m0.069s            real	0m0.068s
+user	0m0.061s            user	0m0.058s            user	0m0.054s
+sys	    0m0.008s            sys	    0m0.010s            sys	    0m0.014s
+
+Median
+real    0m0.069s
+user    0m0.058s
+sys     0m0.010s
+
+2. shuf.py (/usr/local/cs/bin/python3)
+real	0m0.780s            real	0m0.779s            real	0m0.783s            
+user	0m0.718s            user	0m0.715s            user	0m0.730s
+sys	    0m0.045s            sys	    0m0.047s            sys	    0m0.035s
+
+Median
+real    0m0.780s
+user    0m0.718s
+sys     0m0.045s
+
+3. shuf.py (/usr/bin/python3)
+real	0m0.821s            real	0m0.870s            real	0m0.865s
+user	0m0.771s            user	0m0.814s            user	0m0.815s
+sys	    0m0.044s            sys	    0m0.046s            sys	    0m0.042s
+
+Median
+real    0m0.865s
+user    0m0.814s
+sys     0m0.044s
+
+CPU: Intel(R) Xeon(R) Silver 4116 CPU @ 2.10GHz
+OS: Red Hat Enterprise Linux (9.4 Plow)

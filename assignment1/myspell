@@ -1,0 +1,4 @@
+#!/bin/sh
+tr -cs "[!&',./0-9a-zA-Z-]" '[\n*]' \
+    | sort -u \
+    | comm -23 - sorted.words
