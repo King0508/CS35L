@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Read from stdin and extract the commit date time zone offsets
+awk '/^CommitDate:/ { print $NF }' |
+    sort |
+    uniq -c |
+    awk '{print $2, $1}' |
+    sort -k1,1n

@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Check if two arguments are provided
+if [ $# -ne 2 ]; then
+    echo "Usage: $0 <release1> <release2>"
+    exit 1
+fi
+
+release1="$1"
+release2="$2"
+
+# Ensure we're inside a Git repository
+if [ ! -d ".git" ]; then
+    echo "This script must be run inside a Git repository."
+    exit 1
+fi
+
+# Fetch the latest tags to ensure all releases are available
+git fetch --tags
+
+# Check if the releases (tags) exist
+if ! git rev-parse --verify "$release1" >/dev/null 2>&1; then
+    echo "Error: Release '$release1' not found."
+    exit 1
+fi
+
+if ! git rev-parse --verify "$release2" >/dev/null 2>&1; then
+    echo "Error: Release '$release2' not found."
+    exit 1
+fi
+
+# Display the difference between the two releases
+git diff "$release1" "$release2"

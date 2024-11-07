@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Ensure we're in a Git repository
+if [ ! -d ".git" ]; then
+    echo "This script must be run inside a Git repository."
+    exit 1
+fi
+
+# Check if there are at least two commits
+commit_count=$(git rev-list --count HEAD)
+
+if [ "$commit_count" -ge 2 ]; then
+    # Display the difference between HEAD~1 and HEAD
+    git diff HEAD~1 HEAD
+else
+    echo "Not enough commits to show differences."
+fi
