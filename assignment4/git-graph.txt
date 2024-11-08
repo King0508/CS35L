@@ -1,0 +1,101 @@
+*   CommitID: c03bee6e9f 
+|\  Author: Junio C Hamano 
+| | Date: Sun Oct 2 08:24:32 2022 -0700
+| | 
+| |     Merge tag 'l10n-2.38.0-rnd3' of https://github.com/git-l10n/git-po
+| | 
+| * CommitID: dedb2883ce 
+| | Author: Yi-Jyun Pan 
+| | Date: Sat Oct 1 19:04:42 2022 +0800
+| | 
+| |     l10n: zh_TW.po: Git 2.38.0, round 3
+| |   
+| *   CommitID: d7f69b76ec 
+| |\  Author: Jiang Xin 
+| | | Date: Sat Oct 1 10:02:03 2022 +0800
+| | | 
+| | |     Merge branch 'po-id' of github.com:bagasme/git-po
+| | | 
+| | * CommitID: 55b1c1ab1c 
+| | | Author: Bagas Sanjaya 
+| | | Date: Sun Sep 25 14:53:53 2022 +0700
+| | | 
+| | |     l10n: po-id for 2.38 (round 3)
+| | | 
+| * | CommitID: 21cefac967 
+| | | Author: Jiang Xin 
+| | | Date: Thu Sep 29 18:54:12 2022 +0800
+| | | 
+| | |     Merge branch 'l10n-de-2.38-rnd3' of github.com:ralfth/git
+| | |   
+| * |   CommitID: 48bf511320 
+| |\ \  Author: Jiang Xin 
+| | | | Date: Thu Sep 29 08:00:30 2022 +0800
+| | | | 
+| | | |     Merge branch 'fr_2.38_rnd3' of github.com:jnavila/git
+| | | | 
+| | * | CommitID: 48fe8e6a63 
+| | | | Author: Jean-Noël Avila 
+| | | | Date: Wed Sep 28 21:46:22 2022 +0200
+| | | | 
+| | | |     l10n: fr: v2.38.0 round 3
+| | | |   
+| * | |   CommitID: 08f41b8171 
+| |\ \ \  Author: Jiang Xin 
+| | | | | Date: Thu Sep 29 07:59:44 2022 +0800
+| | | | | 
+| | | | |     Merge branch 'catalan' of github.com:Softcatala/git-po
+| | | | | 
+| | * | | CommitID: 42fe2b951a 
+| | |/ /  Author: Jordi Mas 
+| | | |   Date: Wed Sep 28 19:05:55 2022 +0200
+| | | |   
+| | | |       l10n: Update Catalan translation
+| | | | 
+| * | | CommitID: b796ca1cd4 
+| |/ /  Author: Fangyi Zhou 
+| | |   Date: Wed Sep 28 15:50:49 2022 +0100
+| | |   
+| | |       l10n: zh_CN: 2.38.0 round 3
+| | |   
+| * |   CommitID: 37db9416c4 
+| |\ \  Author: Jiang Xin 
+| | | | Date: Wed Sep 28 20:54:29 2022 +0800
+| | | | 
+| | | |     Merge branch 'turkish' of github.com:bitigchi/git-po
+| | | | 
+| | * | CommitID: 2c30dfa7d7 
+| | |/  Author: Emir SARI 
+| | |   Date: Wed Sep 28 12:32:13 2022 +0300
+| | |   
+| | |       l10n: tr: v2.38.0 3rd round
+| | |   
+| * |   CommitID: 8d500614f7 
+| |\ \  Author: Jiang Xin 
+| | | | Date: Wed Sep 28 20:52:34 2022 +0800
+| | | | 
+| | | |     Merge branch 'master' of github.com:alshopov/git-po
+| | | | 
+| | * | CommitID: 88fda53a16 
+| | |/  Author: Alexander Shopov 
+| | |   Date: Wed Sep 28 11:00:59 2022 +0200
+| | |   
+| | |       l10n: bg.po: Updated Bulgarian translation (5484t)
+| | | 
+| * | CommitID: 9af6cb88b6 
+| |/  Author: Alex Henrie 
+| |   Date: Tue Sep 27 22:56:55 2022 -0600
+| |   
+| |       l10n: es: update translation
+| | 
+| * CommitID: 4ff58e9690 
+|/  Author: Jiang Xin 
+|   Date: Wed Sep 28 08:03:38 2022 +0800
+|   
+|       Merge branch 'main' of github.com:git/git
+| 
+* CommitID: bcd6bc478a 
+  Author: Junio C Hamano 
+  Date: Tue Sep 27 11:25:52 2022 -0700
+  
+      Git 2.38-rc2

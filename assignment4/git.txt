@@ -1,0 +1,25 @@
+Branches in the SEASnet repository: 
+  maint
+* master
+  next
+  seen
+  todo
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/jch
+  remotes/origin/main
+  remotes/origin/maint
+  remotes/origin/master
+  remotes/origin/next
+  remotes/origin/seen
+  remotes/origin/todo
+
+
+Branches in my cloned repository from GitHub:
+* master
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/jch
+  remotes/origin/maint
+  remotes/origin/master
+  remotes/origin/next
+  remotes/origin/seen
+  remotes/origin/todo

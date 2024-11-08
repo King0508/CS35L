@@ -1,0 +1,143 @@
+The commit that contains the changes to the problem has ID: 0b55d930a69692c7f4e7b90e35fa41f6c46df4bc
+The author is Johannes Schindelin <Johannes.Schindelin@gmx.de>
+The following are the steps I took and the commands I used to find the correct commit. 
+
+
+--Look for "git merge-tree" in the relevant patch 
+
+$ git log v2.38.0..v2.39.0 --grep="git merge-tree"
+
+...
+
+commit bcf22f29df87f25582de0ac9274d1567fa16be6f
+Merge: 7f8a6caee5 92481d1b26
+Author: Junio C Hamano <gitster@pobox.com>
+Date:   Tue Oct 25 17:11:34 2022 -0700
+
+    Merge branch 'js/merge-ort-in-read-only-repo' into maint-2.38
+
+    In read-only repositories, "git merge-tree" tried to come up with a
+    merge result tree object, which it failed (which is not wrong) and
+    led to a segfault (which is bad), which has been corrected.
+
+    * js/merge-ort-in-read-only-repo:
+      merge-ort: return early when failing to write a blob
+      merge-ort: fix segmentation fault in read-only repositories
+
+...
+
+--Commit bcf22f29df87f25582de0ac9274d1567fa16be6f merged the changes into maint-2.38,
+now just need to look for the parent of the merge commit 
+
+$ git show --pretty=raw bcf22f29df87f25582de0ac9274d1567fa16be6f
+
+commit bcf22f29df87f25582de0ac9274d1567fa16be6f
+tree 170b4e950ba1b15dc3d7b48f13e75211167c7b8c
+parent 7f8a6caee563de5b1df31f698dfbe4b55a6b2bea
+parent 92481d1b26ab57525f5efe01d01c7a3d337b8df7
+
+...
+
+
+--View the parent commit to see the actual code changes that fixed the problem 
+
+$ git show 92481d1b26ab57525f5efe01d01c7a3d337b8df7
+
+commit 92481d1b26ab57525f5efe01d01c7a3d337b8df7
+Author: Johannes Schindelin <Johannes.Schindelin@gmx.de>
+Date:   Wed Sep 28 07:29:22 2022 +0000
+
+    merge-ort: return early when failing to write a blob
+
+    In the previous commit, we fixed a segmentation fault when a tree object
+    could not be written.
+
+ ...
+
+--This output does not contain the changes, so access the previous commit again by repeating the same command 
+
+$ git show --pretty=raw 92481d1b26ab57525f5efe01d01c7a3d337b8df7
+
+commit 92481d1b26ab57525f5efe01d01c7a3d337b8df7
+tree e31c3e46fc2a1c967bcf3e1c1a2d854b9b38c0a9
+parent 0b55d930a69692c7f4e7b90e35fa41f6c46df4bc
+
+
+
+--Now view the parent/previous commit again to see the actual code changes
+
+$ git show 0b55d930a69692c7f4e7b90e35fa41f6c46df4bc
+
+commit 0b55d930a69692c7f4e7b90e35fa41f6c46df4bc
+Author: Johannes Schindelin <Johannes.Schindelin@gmx.de>
+Date:   Wed Sep 28 07:29:21 2022 +0000
+
+    merge-ort: fix segmentation fault in read-only repositories
+
+    If the blob/tree objects cannot be written, we really need the merge
+    operations to fail, and not to continue (and then try to access the tree
+    object which is however still set to `NULL`).
+
+    Let's stop ignoring the return value of `write_object_file()` and
+    `write_tree()` and set `clean = -1` in the error case.
+
+    Reviewed-by: Elijah Newren <newren@gmail.com>
+    Signed-off-by: Johannes Schindelin <johannes.schindelin@gmx.de>
+    Signed-off-by: Junio C Hamano <gitster@pobox.com>
+
+diff --git a/merge-ort.c b/merge-ort.c
+index 99dcee2db8..f3bdce1041 100644
+--- a/merge-ort.c
++++ b/merge-ort.c
+@@ -3571,15 +3571,15 @@ static int tree_entry_order(const void *a_, const void *b_)
+                                 b->string, strlen(b->string), bmi->result.mode);
+ }
+
+-static void write_tree(struct object_id *result_oid,
+-                      struct string_list *versions,
+-                      unsigned int offset,
+-                      size_t hash_size)
++static int write_tree(struct object_id *result_oid,
++                     struct string_list *versions,
++                     unsigned int offset,
++                     size_t hash_size)
+ {
+        size_t maxlen = 0, extra;
+        unsigned int nr;
+        struct strbuf buf = STRBUF_INIT;
+-       int i;
++       int i, ret = 0;
+
+        assert(offset <= versions->nr);
+        nr = versions->nr - offset;
+@@ -3605,8 +3605,10 @@ static void write_tree(struct object_id *result_oid,
+        }
+
+        /* Write this object file out, and record in result_oid */
+-       write_object_file(buf.buf, buf.len, OBJ_TREE, result_oid);
++       if (write_object_file(buf.buf, buf.len, OBJ_TREE, result_oid))
++               ret = -1;
+        strbuf_release(&buf);
++       return ret;
+ }
+
+ static void record_entry_for_tree(struct directory_versions *dir_metadata,
+@@ -3625,13 +3627,13 @@ static void record_entry_for_tree(struct directory_versions *dir_metadata,
+                           basename)->util = &mi->result;
+ }
+
+-static void write_completed_directory(struct merge_options *opt,
+-                                     const char *new_directory_name,
+-                                     struct directory_versions *info)
++static int write_completed_directory(struct merge_options *opt,
++                                    const char *new_directory_name,
++                                    struct directory_versions *info)
+ {
+        const char *prev_dir;
+        struct merged_info *dir_info = NULL;
+-       unsigned int offset;
++       unsigned int offset, ret = 0;
+
+:
+
+

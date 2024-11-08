@@ -1,0 +1,89 @@
+
+This git command looks for the file that contains "Even newspaper reports present contradictory information."
+
+$ git grep -n "Even newspaper reports present contradictory information."
+northamerica:880:# and wrote "Even newspaper reports present contradictory information."
+
+This git command identifies the commit and author
+
+$ git blame -C -C northamerica | grep "Even newspaper reports present contradictory information."
+c8f960ec7 (Paul Eggert        2013-09-02 08:09:06 -0700  880) # and wrote "Even newspaper reports present contradictory information."
+
+This git command shows the commit details, including the author and the date.  
+
+$ git show c8f960ec7
+commit c8f960ec72312d0d4368fc025a57812d8f8021f2
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Mon Sep 2 08:09:06 2013 -0700
+
+    * backward: Move some links back to primary files.
+
+    This should allay concerns that the links would go away any time soon.
+    Suggested by Stephen Colebourne in
+    <http://mm.icann.org/pipermail/tz/2013-September/019801.html>.
+    Change "`" to "'"; these days, "`" and "'" are not symmetric.
+    * antarctica (Antarctica/McMurdo):
+    * europe (Europe/Jersey, Europe/Guernsey, Europe/Isle_of_Man)
+    (Europe/Mariehamn, Europe/Busingen, Europe/Vatican, Europe/San_Marino)
+    (Arctic/Longyearbyen, Europe/Ljubljana, Europe/Podgorica)
+    (Europe/Sarajevo, Europe/Skopje, Europe/Zagreb, Europe/Bratislava):
+    * northamerica (America/St_Barthelemy, America/Marigot):
+    * southamerica (America/Lower_Princes, America/Kralendijk):
+    Move here from 'backward'.  This reverts a 2013-08-09 change.
+
+diff --git a/antarctica b/antarctica
+index 4cb74766..234e59c3 100644
+--- a/antarctica
++++ b/antarctica
+@@ -16,9 +16,9 @@
+ #
+ # Except for the French entries,
+ # I made up all time zone abbreviations mentioned here; corrections welcome!
+-# FORMAT is `zzz' and GMTOFF is 0 for locations while uninhabited.
++# FORMAT is 'zzz' and GMTOFF is 0 for locations while uninhabited.
+
+-# These rules are stolen from the `southamerica' file.
++# These rules are stolen from the 'southamerica' file.
+ # Rule NAME    FROM    TO      TYPE    IN      ON      AT      SAVE    LETTER/S
+ Rule   ArgAQ   1964    1966    -       Mar      1      0:00    0       -
+ Rule   ArgAQ   1964    1966    -       Oct     15      0:00    1:00    S
+@@ -231,7 +231,7 @@ Zone Antarctica/Syowa       0       -       zzz     1957 Jan 29
+ # Scott Base, Ross Island, since 1957-01.
+ # See Pacific/Auckland.
+ #
+-# These rules for New Zealand are stolen from the `australasia' file.
++# These rules for New Zealand are stolen from the 'australasia' file.
+ # Rule NAME    FROM    TO      TYPE    IN      ON      AT      SAVE    LETTER/S
+ Rule   NZAQ    1974    only    -       Nov      3      2:00s   1:00    D
+ Rule   NZAQ    1975    1988    -       Oct     lastSun 2:00s   1:00    D
+@@ -269,11 +269,11 @@ Rule      NZAQ    2008    max     -       Apr     Sun>=1  2:00s   0       S
+ # From Lee Hotz (2001-03-08):
+ # I queried the folks at Columbia who spent the summer at Vostok and this is
+ # what they had to say about time there:
+-# ``in the US Camp (East Camp) we have been on New Zealand (McMurdo)
++# "in the US Camp (East Camp) we have been on New Zealand (McMurdo)
+ # time, which is 12 hours ahead of GMT. The Russian Station Vostok was
+ # 6 hours behind that (although only 2 miles away, i.e. 6 hours ahead
+ # of GMT). This is a time zone I think two hours east of Moscow. The
+-# natural time zone is in between the two: 8 hours ahead of GMT.''
++# natural time zone is in between the two: 8 hours ahead of GMT."
+ #
+ # From Paul Eggert (2001-05-04):
+ # This seems to be hopelessly confusing, so I asked Lee Hotz about it
+@@ -339,10 +339,7 @@ Zone Antarctica/Palmer     0       -       zzz     1965
+ #
+ #
+ # McMurdo Station, Ross Island, since 1955-12
+-# See Pacific/Auckland.
+-#
+ # Amundsen-Scott South Pole Station, continuously occupied since 1956-11-20
+-# See Pacific/Auckland.
+ #
+ # From Chris Carrier (1996-06-27):
+ # Siple, the first commander of the South Pole station,
+@@ -363,3 +360,5 @@ Zone Antarctica/Palmer      0       -       zzz     1965
+
+
+
+
+
